@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ip= (EditText) findViewById (R.id.editText);
-if(ip.getText().toString().contains("Ip del host")) {
+if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
     ip.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,7 +53,7 @@ if(ip.getText().toString().contains("Ip del host")) {
                 if(actionId== EditorInfo.IME_ACTION_DONE){
                     System.out.println("hecho");
                     ipServidor=ip.getText().toString();
-                    Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    Intent myIntent = new Intent(MainActivity.this, Login.class);
                     myIntent.putExtra("ipeson", ipServidor); //Optional parameters
                     MainActivity.this.startActivity(myIntent);
                     return false;
