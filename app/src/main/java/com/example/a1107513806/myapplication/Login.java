@@ -1,6 +1,7 @@
 package com.example.a1107513806.myapplication;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -10,7 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+import java.util.Observable;
+import java.util.Observer;
+import java.util.UUID;
+
+public class Login extends AppCompatActivity implements Observer {
 
     EditText nombre;
     EditText contrasena;
@@ -19,15 +24,20 @@ public class Login extends AppCompatActivity {
     String ipServidor;
     String getNombre;
     String getContrasena;
+    Usuario user;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         nombre= (EditText) findViewById(R.id.name);
         contrasena = (EditText) findViewById(R.id.contra);
         iniciarSesion= (Button) findViewById(R.id.BotonIniciarSesion);
         registro= (Button) findViewById(R.id.BotonRegistro);
         Intent intent = getIntent();
         ipServidor = intent.getStringExtra("ipeson");
+        SerializameEsta.getInstance(ipServidor).addObserver(this);
 
         if(nombre.getText().toString().equalsIgnoreCase("nombre")) {
             nombre.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +80,7 @@ public class Login extends AppCompatActivity {
                 return true;
             }
         });
-//aqui lo que pasa cuando se da iniciar sesion (crear un objeto Usuario)(serializar y enviar mediante comununicacion)
+//envia el objeto usuario cuando se da click en login
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -78,12 +88,19 @@ public class Login extends AppCompatActivity {
                 getContrasena=contrasena.getText().toString();
                 System.out.println(getNombre);
                 System.out.println(getContrasena);
+                user= new Usuario(getNombre,getContrasena);
+                SerializameEsta.getInstance(ipServidor).enviar(user);
             }
         });
 
 
 
 
+
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
 
     }
 }

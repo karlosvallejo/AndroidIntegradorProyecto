@@ -53,6 +53,7 @@ if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
                 if(actionId== EditorInfo.IME_ACTION_DONE){
                     System.out.println("hecho");
                     ipServidor=ip.getText().toString();
+
                     Intent myIntent = new Intent(MainActivity.this, Login.class);
                     myIntent.putExtra("ipeson", ipServidor); //Optional parameters
                     MainActivity.this.startActivity(myIntent);

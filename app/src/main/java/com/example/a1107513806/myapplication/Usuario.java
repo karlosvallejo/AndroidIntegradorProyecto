@@ -1,7 +1,14 @@
 package com.example.a1107513806.myapplication;
 
-/**
- * Created by 1107513806 on 16/09/2016.
- */
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
+    String nombre;
+    String contrasena;
+
+    public Usuario(String nombre, String contrasena){
+        this.nombre=nombre;
+        this.contrasena=contrasena;
+    }
+
 }

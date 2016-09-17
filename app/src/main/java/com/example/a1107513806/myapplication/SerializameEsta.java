@@ -9,20 +9,31 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class SerializameEsta  extends Thread  {
-    private DatagramSocket ds;
+public class SerializameEsta  extends Observable implements Runnable {
+    DatagramSocket dgs;
     private InetAddress ipServer;
     String server;
+    private final int PUERTO= 5000;
     private ArrayList<Usuario> mensajes;
-    private int myId;
-    private boolean identificado;
-    public SerializameEsta() {
+
+    private static  SerializameEsta ref;
+
+
+
+
+    private SerializameEsta(String ipserver) {
         this.mensajes = new ArrayList<Usuario>();
+
+        this.server= ipserver;
         try {
             ipServer = InetAddress.getByName(server);
-            ds = new DatagramSocket(5000);
+            dgs= new DatagramSocket(PUERTO);
+            System.out.println("iniciado socket en puerto:"+PUERTO);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,12 +41,22 @@ public class SerializameEsta  extends Thread  {
 
     }
 
-    @Override
+    public static SerializameEsta getInstance(String ipserver) {
+        if (ref == null) {
+            ref = new SerializameEsta(ipserver);
+            Thread runner = new Thread(ref);
+            runner.start();
+        }
+
+        return ref;
+    }
+
+
     public void run() {
         while (true) {
             recibir();
             try {
-                sleep(100);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -76,22 +97,25 @@ public class SerializameEsta  extends Thread  {
         try {
             byte[] buf = new byte[1024];
             DatagramPacket dp = new DatagramPacket(buf, buf.length);
-            ds.receive(dp);
-            Object recibido = deserializar(dp.getData());
+
+            dgs.receive(dp);
+
+               Object recibido = deserializar(dp.getData());
+
 /*if(recibido instanceof Categoria){
     //TODO hacer algo con la categoria
 }*/
 
-            if(recibido instanceof String){
-
+    /*        if(recibido instanceof String){
+//TODO hacer algo con el string (valida si el usuario existe)
             }
+*/
 
 
 
 
 
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -101,8 +125,9 @@ public class SerializameEsta  extends Thread  {
     public void enviar(Object m) {
         try {
             byte[] datos = serializar(m);
-            DatagramPacket paq = new DatagramPacket(datos, datos.length, ipServer, 5000);
-            ds.send(paq);
+            DatagramPacket paq = new DatagramPacket(datos, datos.length, ipServer, PUERTO);
+            dgs.send(paq);
+            System.out.println("objeto enviado");
         } catch (IOException e) {
             e.printStackTrace();
         }
