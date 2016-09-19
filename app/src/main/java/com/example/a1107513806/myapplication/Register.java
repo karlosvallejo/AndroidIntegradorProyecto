@@ -102,7 +102,7 @@ public class Register extends AppCompatActivity implements Observer {
         contrase = (EditText) findViewById(R.id.contra);
         email = (EditText) findViewById(R.id.email);
         regis = (Button) findViewById(R.id.Registrar);
-
+    }
         regis.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -117,7 +117,7 @@ public class Register extends AppCompatActivity implements Observer {
 
 
         }
-    }
+
     @Override
     public void update(Observable observable, Object data) {
 
