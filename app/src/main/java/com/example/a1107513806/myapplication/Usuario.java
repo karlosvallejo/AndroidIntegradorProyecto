@@ -1,5 +1,7 @@
 package com.example.a1107513806.myapplication;
 
+import android.widget.EditText;
+
 import java.io.Serializable;
 
 public class Usuario implements Serializable{
@@ -10,5 +12,6 @@ public class Usuario implements Serializable{
         this.nombre=nombre;
         this.contrasena=contrasena;
     }
+
 
 }
