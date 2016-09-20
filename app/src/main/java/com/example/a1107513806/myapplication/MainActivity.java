@@ -10,13 +10,18 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     EditText ip;
     String ipServidor;
-
+    InetAddress i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +58,67 @@ if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
                 if(actionId== EditorInfo.IME_ACTION_DONE){
                     System.out.println("hecho");
                     ipServidor=ip.getText().toString();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
 
-                    Intent myIntent = new Intent(MainActivity.this, Login.class);
-                    myIntent.putExtra("ipeson", ipServidor); //Optional parameters
-                    MainActivity.this.startActivity(myIntent);
-                    return false;
+                                i= InetAddress.getByName(ipServidor);
+                                if(i.isReachable(300)) {
+                                    Intent myIntent = new Intent(MainActivity.this, Login.class);
+                                    myIntent.putExtra("ipeson", ipServidor); //Optional parameters
+                                    MainActivity.this.startActivity(myIntent);
+
+
+                                }else{
+                                    new Thread() {
+                                        public void run() {
+
+
+                                            runOnUiThread(new Runnable() {
+
+                                                @Override
+                                                public void run() {
+                                                    Toast toast = Toast.makeText(getApplicationContext(), "servidor no encontrado",Toast.LENGTH_SHORT);
+                                                    toast.show();
+                                                }
+                                            });
+
+
+
+                                        }
+                                    }.start();
+
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                new Thread() {
+                                    public void run() {
+
+
+                                                runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        Toast toast = Toast.makeText(getApplicationContext(), "servidor no encontrado",Toast.LENGTH_SHORT);
+                                                        toast.show();
+                                                    }
+                                                });
+
+
+
+                                    }
+                                }.start();
+
+
+                            }
+                        }
+                    }).start();
+
+
+
+                    return true;
+
                 }
 
 

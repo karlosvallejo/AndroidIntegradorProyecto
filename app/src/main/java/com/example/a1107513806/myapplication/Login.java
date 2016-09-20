@@ -65,6 +65,15 @@ public class Login extends AppCompatActivity implements Observer {
             }
         });
 
+        registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Login.this, Register.class);
+                myIntent.putExtra("ipeson", ipServidor);
+                Login.this.startActivity(myIntent);
+            }
+        });
+
         contrasena.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -88,8 +97,9 @@ public class Login extends AppCompatActivity implements Observer {
                 getContrasena=contrasena.getText().toString();
                 System.out.println(getNombre);
                 System.out.println(getContrasena);
-                user= new Usuario(getNombre,getContrasena);
+                user= new Usuario(getNombre,getContrasena,false);
                 SerializameEsta.getInstance(ipServidor).enviar(user);
+
             }
         });
 

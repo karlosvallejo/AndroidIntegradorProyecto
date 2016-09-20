@@ -98,7 +98,7 @@ public class SerializameEsta  extends Observable implements Runnable {
             byte[] buf = new byte[1024];
             DatagramPacket dp = new DatagramPacket(buf, buf.length);
 
-            dgs.receive(dp);
+           dgs.receive(dp);
 
                Object recibido = deserializar(dp.getData());
 

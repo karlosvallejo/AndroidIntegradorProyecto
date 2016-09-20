@@ -8,16 +8,18 @@ public class Usuario implements Serializable{
     String nombre;
     String contrasena;
     String email;
-
-    public Usuario(String nombre, String contrasena){
+    boolean esRegistro;
+    public Usuario(String nombre, String contrasena, boolean registro){
         this.nombre=nombre;
         this.contrasena=contrasena;
+        this.esRegistro=registro;
     }
 
-    public Usuario(String nombre, String contrasena, String email){
+    public Usuario(String nombre, String contrasena, String email, boolean registro){
         this.nombre=nombre;
         this.contrasena=contrasena;
         this.email=email;
+        this.esRegistro=registro;
     }
 
 

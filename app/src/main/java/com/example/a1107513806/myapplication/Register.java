@@ -38,6 +38,10 @@ public class Register extends AppCompatActivity implements Observer {
         Intent intente = getIntent();
         SerializameEsta.getInstance(ipServidor).addObserver(this);
         ipServidor = intente.getStringExtra("ipeson");
+        nombre = (EditText) findViewById(R.id.username);
+        contrase = (EditText) findViewById(R.id.contra);
+        email = (EditText) findViewById(R.id.email);
+        regis = (Button) findViewById(R.id.Registrar);
 
         if(nombre.getText().toString().equalsIgnoreCase("nombre")) {
             nombre.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +70,21 @@ public class Register extends AppCompatActivity implements Observer {
                 return true;
             }
         });
+
+        regis.setOnClickListener(new View.OnClickListener(){
+                                     @Override
+                                     public void onClick(View view) {
+                                         getNombre=nombre.getText().toString();
+                                         getContrasena=contrase.getText().toString();
+                                         getEmail=email.getText().toString();
+
+                                         user= new Usuario(getNombre,getContrasena,getEmail,true);
+                                         SerializameEsta.getInstance(ipServidor).enviar(user);
+
+                                     }
+
+
+                                 });
 
         contrase.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -98,25 +117,11 @@ public class Register extends AppCompatActivity implements Observer {
                 return true;
             }
         });
-        nombre = (EditText) findViewById(R.id.username);
-        contrase = (EditText) findViewById(R.id.contra);
-        email = (EditText) findViewById(R.id.email);
-        regis = (Button) findViewById(R.id.Registrar);
+
     }
-        regis.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                getNombre=nombre.getText().toString();
-                getContrasena=contrase.getText().toString();
-                getEmail=email.getText().toString();
-
-                user= new Usuario(getNombre,getContrasena,getEmail);
-                SerializameEsta.getInstance(ipServidor).enviar(user);
-
-                }
 
 
-        }
+
 
     @Override
     public void update(Observable observable, Object data) {
