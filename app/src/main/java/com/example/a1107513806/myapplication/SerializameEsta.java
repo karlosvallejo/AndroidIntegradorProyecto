@@ -128,6 +128,7 @@ public class SerializameEsta  extends Observable implements Runnable {
             DatagramPacket paq = new DatagramPacket(datos, datos.length, ipServer, PUERTO);
             dgs.send(paq);
             System.out.println("objeto enviado");
+            System.out.println(ipServer.getHostName());
         } catch (IOException e) {
             e.printStackTrace();
         }

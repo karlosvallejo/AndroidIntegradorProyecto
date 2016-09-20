@@ -79,8 +79,12 @@ if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
 
                                                 @Override
                                                 public void run() {
-                                                    Toast toast = Toast.makeText(getApplicationContext(), "servidor no encontrado",Toast.LENGTH_SHORT);
+                                                    Toast toast = Toast.makeText(getApplicationContext(), "Ping no respondido, Continuando",Toast.LENGTH_SHORT);
                                                     toast.show();
+
+                                                    Intent myIntent = new Intent(MainActivity.this, Login.class);
+                                                    myIntent.putExtra("ipeson", ipServidor); //Optional parameters
+                                                    MainActivity.this.startActivity(myIntent);
                                                 }
                                             });
 
@@ -100,6 +104,7 @@ if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
 
                                                     @Override
                                                     public void run() {
+
                                                         Toast toast = Toast.makeText(getApplicationContext(), "servidor no encontrado",Toast.LENGTH_SHORT);
                                                         toast.show();
                                                     }

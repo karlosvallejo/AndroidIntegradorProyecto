@@ -98,6 +98,7 @@ public class Login extends AppCompatActivity implements Observer {
                 System.out.println(getNombre);
                 System.out.println(getContrasena);
                 user= new Usuario(getNombre,getContrasena,false);
+                System.out.println("enviado login a: "+ipServidor);
                 SerializameEsta.getInstance(ipServidor).enviar(user);
 
             }
