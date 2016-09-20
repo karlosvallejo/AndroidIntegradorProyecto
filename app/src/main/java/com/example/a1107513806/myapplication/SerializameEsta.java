@@ -102,13 +102,22 @@ public class SerializameEsta  extends Observable implements Runnable {
 
                Object recibido = deserializar(dp.getData());
 
+            setChanged();
+            notifyObservers(recibido);
+            clearChanged();
+
+
+
 /*if(recibido instanceof Categoria){
     //TODO hacer algo con la categoria
 }*/
 
     /*        if(recibido instanceof String){
-//TODO hacer algo con el string (valida si el usuario existe)
+//TODO hacer algo con el string (valida si el usuario existe o si el usuario se registro satisfactoriamente)
+
             }
+
+
 */
 
 

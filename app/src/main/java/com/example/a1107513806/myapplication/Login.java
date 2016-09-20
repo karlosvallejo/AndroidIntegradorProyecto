@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
@@ -25,6 +26,8 @@ public class Login extends AppCompatActivity implements Observer {
     String getNombre;
     String getContrasena;
     Usuario user;
+    Categoria catUno;
+    Categoria catDos;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +103,19 @@ public class Login extends AppCompatActivity implements Observer {
                 user= new Usuario(getNombre,getContrasena,false);
                 System.out.println("enviado login a: "+ipServidor);
                 SerializameEsta.getInstance(ipServidor).enviar(user);
+                //SIMULO QUE RECIBIO LA APROBACION PARA CAMBIAR DE ACTIVIDAD(CUANDO FUNCIONE EL SERVIDOR, RELAIZAR ESTO MEDIANTE EL METODO UPDATE)
+
+                ArrayList<Item> simulacionArticulos= new ArrayList<Item>();
+                simulacionArticulos.add(new Item());
+                simulacionArticulos.add(new Item());
+                simulacionArticulos.add(new Item());
+                catUno= new Categoria(1, "Ropa", simulacionArticulos);
+                catDos= new Categoria(2,"Comida", simulacionArticulos);
+                Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
+                myIntent.putExtra("nombreUsuario", getNombre);
+                myIntent.putExtra("nombreCat1", catUno.nombreCategoria);
+                myIntent.putExtra("nombreCat2", catDos.nombreCategoria);
+                Login.this.startActivity(myIntent);
 
             }
         });
@@ -110,8 +126,49 @@ public class Login extends AppCompatActivity implements Observer {
 
     }
 
-    @Override
-    public void update(Observable observable, Object data) {
+
+    public void update(Observable observed, Object data) {
+	//interpreto el objeto que llego
+
+
+if(data instanceof Categoria){
+    //asigno el objeto que llego a uno tipo Categoria
+    Categoria c= (Categoria) data;
+    //Si el objeto Categoria es del numero 1, lo asigno a su respectiva referencia
+    if (c.numeroCategoria==1) {
+        catUno = (Categoria) data;
+    }
+    //Si el objeto Categoria es del numero 2, lo asigno a su respectiva referencia
+    if (c.numeroCategoria==1) {
+        catDos = (Categoria) data;
+    }
+
+}
+
+            if(data instanceof String){
+
+                if(((String) data).equalsIgnoreCase("AprobadoLogin")){
+                    //lanzar otra actividad
+                }else{
+                //    notificar que el usuario no es valido o no esta registrado
+                }
+
+                if(((String) data).equalsIgnoreCase("AprobadoRegistro")){
+                    //lanzar otra actividad
+                }else{
+                    //    notificar que el usuario ya existe
+                }
+
+
+            }
+
+
+
+
+
+
+
+
 
     }
 }
