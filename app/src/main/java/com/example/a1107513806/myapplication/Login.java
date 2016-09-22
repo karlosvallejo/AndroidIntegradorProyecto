@@ -116,31 +116,46 @@ public class Login extends AppCompatActivity implements Observer {
 
     }
 
+    private void comprobarCategoria(Object data){
+        if(data instanceof ArrayList){
+            //asigno el objeto que llego a uno tipo Arraylist
+            ArrayList a= (ArrayList) data;
+            for(int i=0; i<a.size();i++){
+                //asigno el objeto del arraylist a categoria
+                Categoria c= (Categoria) a.get(i);
+                //Si el objeto Categoria es del numero 1, lo asigno a su respectiva referencia
+                if (c.numeroCategoria==1) {
+                    catUno = c ;
+                }
+                //Si el objeto Categoria es del numero 2, lo asigno a su respectiva referencia
+                if (c.numeroCategoria==2) {
+                    catDos = c ;
+                }
+            }
+            //si es correcto lanzo la siguiente actividad
+            Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
+            myIntent.putExtra("nombreUsuario", getNombre);
+            myIntent.putExtra("catUno", catUno);
+            myIntent.putExtra("catDos", catDos);
+            Login.this.startActivity(myIntent);
+
+
+        }
+    }
+
 
     public void update(Observable observed, Object data) {
 	//interpreto el objeto que llego
 
+comprobarCategoria(data);
 
-if(data instanceof Categoria){
-    //asigno el objeto que llego a uno tipo Categoria
-    Categoria c= (Categoria) data;
-    //Si el objeto Categoria es del numero 1, lo asigno a su respectiva referencia
-    if (c.numeroCategoria==1) {
-      //  catUno = (Categoria) data;
-    }
-    //Si el objeto Categoria es del numero 2, lo asigno a su respectiva referencia
-    if (c.numeroCategoria==1) {
-      //  catDos = (Categoria) data;
-    }
-
-}
 
             if(data instanceof String){
 
                 if(((String) data).equalsIgnoreCase("AprobadoLogin")){
 
 //SIMULO QUE el servidor me mando las categorias, aun pendiente
-                     String itemsUno[]=new String[4];
+                 /*    String itemsUno[]=new String[4];
                     float[] itemsUnoPrecio= new float[4];
                       itemsUnoPrecio[0]=10000;
                     itemsUnoPrecio[1]=5000;
@@ -162,12 +177,11 @@ if(data instanceof Categoria){
                     itemsDos[3]="Empanadas";
                     catUno= new Categoria(1, "Ropa",itemsUno, itemsUnoPrecio);
                     catDos= new Categoria(2,"Comida", itemsDos, itemsDosPrecio);
-//lanzar otra actividad
-                    Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
-                    myIntent.putExtra("nombreUsuario", getNombre);
-                    myIntent.putExtra("catUno", catUno);
-                    myIntent.putExtra("catDos", catDos);
-                    Login.this.startActivity(myIntent);
+                    */
+                    //lanzar otra actividad
+
+
+
                 }else if(((String) data).equalsIgnoreCase("NoAprobadoLogin")){
                 //    notificar que el usuario no es valido o no esta registrado
                     new Thread() {

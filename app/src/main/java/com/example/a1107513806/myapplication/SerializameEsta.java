@@ -56,7 +56,7 @@ public class SerializameEsta  extends Observable implements Runnable {
         while (true) {
             recibir();
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
