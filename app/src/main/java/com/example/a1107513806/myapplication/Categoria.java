@@ -1,11 +1,13 @@
 package com.example.a1107513806.myapplication;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by sky_k on 20/09/2016.
  */
-public class Categoria {
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
     int numeroCategoria;
     String nombreCategoria;
     ArrayList<Item> itemsLista;
