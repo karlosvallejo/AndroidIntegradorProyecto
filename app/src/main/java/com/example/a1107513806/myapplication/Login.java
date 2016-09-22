@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -103,19 +104,8 @@ public class Login extends AppCompatActivity implements Observer {
                 user= new Usuario(getNombre,getContrasena,false);
                 System.out.println("enviado login a: "+ipServidor);
                 SerializameEsta.getInstance(ipServidor).enviar(user);
-                //SIMULO QUE RECIBIO LA APROBACION PARA CAMBIAR DE ACTIVIDAD(CUANDO FUNCIONE EL SERVIDOR, RELAIZAR ESTO MEDIANTE EL METODO UPDATE)
 
-                ArrayList<Item> simulacionArticulos= new ArrayList<Item>();
-                simulacionArticulos.add(new Item());
-                simulacionArticulos.add(new Item());
-                simulacionArticulos.add(new Item());
-                catUno= new Categoria(1, "Ropa", simulacionArticulos);
-                catDos= new Categoria(2,"Comida", simulacionArticulos);
-                Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
-                myIntent.putExtra("nombreUsuario", getNombre);
-                myIntent.putExtra("nombreCat1", catUno.nombreCategoria);
-                myIntent.putExtra("nombreCat2", catDos.nombreCategoria);
-                Login.this.startActivity(myIntent);
+
 
             }
         });
@@ -148,16 +138,44 @@ if(data instanceof Categoria){
             if(data instanceof String){
 
                 if(((String) data).equalsIgnoreCase("AprobadoLogin")){
-                    //lanzar otra actividad
-                }else{
+
+//SIMULO QUE el servidor me mando las categorias, aun pendiente
+                    ArrayList<Item> simulacionArticulos= new ArrayList<Item>();
+                    simulacionArticulos.add(new Item());
+                    simulacionArticulos.add(new Item());
+                    simulacionArticulos.add(new Item());
+                    catUno= new Categoria(1, "Ropa", simulacionArticulos);
+                    catDos= new Categoria(2,"Comida", simulacionArticulos);
+//lanzar otra actividad
+                    Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
+                    myIntent.putExtra("nombreUsuario", getNombre);
+                    myIntent.putExtra("nombreCat1", catUno.nombreCategoria);
+                    myIntent.putExtra("nombreCat2", catDos.nombreCategoria);
+                    Login.this.startActivity(myIntent);
+                }else if(((String) data).equalsIgnoreCase("NoAprobadoLogin")){
                 //    notificar que el usuario no es valido o no esta registrado
+                    new Thread() {
+                        public void run() {
+
+
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Usuario o Contraseña Incorrectos",Toast.LENGTH_SHORT);
+                                    toast.show();
+
+
+                                }
+                            });
+
+
+
+                        }
+                    }.start();
                 }
 
-                if(((String) data).equalsIgnoreCase("AprobadoRegistro")){
-                    //lanzar otra actividad
-                }else{
-                    //    notificar que el usuario ya existe
-                }
+
 
 
             }

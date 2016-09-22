@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -125,7 +126,37 @@ public class Register extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
+        if(data instanceof String){
+        if (((String) data).equalsIgnoreCase("AprobadoRegistro")) {
+            //notificar de registro satisfactorio
+            new Thread() {
+                public void run() {
 
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
+                            toast.show();
+
+
+                        }
+                    });
+
+
+                }
+            }.start();
+
+            //regresar a actividad del login
+            Intent myIntent = new Intent(Register.this, Login.class);
+            myIntent.putExtra("ipeson", ipServidor); //Optional parameters
+            Register.this.startActivity(myIntent);
+
+        } else {
+            //    notificar que el usuario ya existe
+        }
+    }
     }
 }
 
