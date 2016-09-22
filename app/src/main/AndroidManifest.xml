@@ -27,8 +27,8 @@
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".ActividadCategoria" />
-        <activity android:name=".ListaArticulos"></activity>
-
+        <activity android:name=".ListaArticulos" />
+        <activity android:name=".ActividadPedir"></activity>
     </application>
 
 </manifest>

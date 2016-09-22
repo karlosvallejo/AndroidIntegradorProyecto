@@ -156,7 +156,7 @@ if(data instanceof Categoria){
                     itemsUno[1]="Zapatos";
                     itemsUno[2]="Pantalon";
                     itemsUno[3]="Gafas";
-                    itemsDos[0]= "Perro Caliente";
+                    itemsDos[0]= "HotDog";
                     itemsDos[1]="Café";
                     itemsDos[2]="Pizza";
                     itemsDos[3]="Empanadas";

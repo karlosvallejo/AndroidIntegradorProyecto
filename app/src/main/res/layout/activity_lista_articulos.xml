@@ -14,28 +14,28 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/artUno"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp" />
+        android:layout_marginTop="73dp"
+        android:layout_below="@+id/nombrin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/artDos"
-        android:layout_below="@+id/artUno"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_alignBottom="@+id/cantidadPedidos2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/artTres"
-        android:layout_below="@+id/artDos"
-        android:layout_alignLeft="@+id/artDos"
-        android:layout_alignStart="@+id/artDos"
-        android:layout_marginTop="52dp" />
+        android:layout_below="@+id/cantidadPedidos2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,9 +43,8 @@
         android:text="New Button"
         android:id="@+id/artCuatro"
         android:layout_below="@+id/artTres"
-        android:layout_alignLeft="@+id/artTres"
-        android:layout_alignStart="@+id/artTres"
-        android:layout_marginTop="46dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,5 +62,58 @@
         android:text="Articulos"
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cantidadPedidos1"
+        android:text="Cantidad"
+        android:layout_alignBottom="@+id/artUno"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cantidadPedidos2"
+        android:text="Cantidad"
+        android:layout_below="@+id/cantidadPedidos1"
+        android:layout_alignLeft="@+id/cantidadPedidos1"
+        android:layout_alignStart="@+id/cantidadPedidos1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cantidadPedidos3"
+        android:text="Cantidad"
+        android:layout_above="@+id/artCuatro"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/cantidadPedidos4"
+        android:text="Cantidad"
+        android:layout_alignTop="@+id/artCuatro"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continuar"
+        android:id="@+id/botonContinuar"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/artCuatro"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
