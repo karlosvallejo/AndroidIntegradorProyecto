@@ -140,17 +140,33 @@ if(data instanceof Categoria){
                 if(((String) data).equalsIgnoreCase("AprobadoLogin")){
 
 //SIMULO QUE el servidor me mando las categorias, aun pendiente
-                    ArrayList<Item> simulacionArticulos= new ArrayList<Item>();
-                    simulacionArticulos.add(new Item());
-                    simulacionArticulos.add(new Item());
-                    simulacionArticulos.add(new Item());
-                    catUno= new Categoria(1, "Ropa", simulacionArticulos);
-                    catDos= new Categoria(2,"Comida", simulacionArticulos);
+                     String itemsUno[]=new String[4];
+                    float[] itemsUnoPrecio= new float[4];
+                      itemsUnoPrecio[0]=10000;
+                    itemsUnoPrecio[1]=5000;
+                    itemsUnoPrecio[2]=2000;
+                    itemsUnoPrecio[3]=20000;
+                    String itemsDos[] = new String[4];
+                    float[] itemsDosPrecio= new float[4];
+                    itemsDosPrecio[0]=10000;
+                    itemsDosPrecio[1]=5000;
+                    itemsDosPrecio[2]=2000;
+                    itemsDosPrecio[3]=20000;
+                    itemsUno[0]= "Camiseta";
+                    itemsUno[1]="Zapatos";
+                    itemsUno[2]="Pantalon";
+                    itemsUno[3]="Gafas";
+                    itemsDos[0]= "Perro Caliente";
+                    itemsDos[1]="Café";
+                    itemsDos[2]="Pizza";
+                    itemsDos[3]="Empanadas";
+                    catUno= new Categoria(1, "Ropa",itemsUno, itemsUnoPrecio);
+                    catDos= new Categoria(2,"Comida", itemsDos, itemsDosPrecio);
 //lanzar otra actividad
                     Intent myIntent = new Intent(Login.this, ActividadCategoria.class);
                     myIntent.putExtra("nombreUsuario", getNombre);
-                    myIntent.putExtra("nombreCat1", catUno.nombreCategoria);
-                    myIntent.putExtra("nombreCat2", catDos.nombreCategoria);
+                    myIntent.putExtra("catUno", catUno);
+                    myIntent.putExtra("catDos", catDos);
                     Login.this.startActivity(myIntent);
                 }else if(((String) data).equalsIgnoreCase("NoAprobadoLogin")){
                 //    notificar que el usuario no es valido o no esta registrado

@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class Item implements Serializable{
     private static final long serialVersionUID = 1L;
-    public int precio;
+    public float precio;
     public String nombre;
-    public Item(String nom, int prec){
-this.precio=prec;
+    public Item(String nom, float prec){
+        this.precio=prec;
         this.nombre= nom;
     }
 }
