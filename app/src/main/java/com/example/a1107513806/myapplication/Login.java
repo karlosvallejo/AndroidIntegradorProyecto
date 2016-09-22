@@ -126,11 +126,11 @@ if(data instanceof Categoria){
     Categoria c= (Categoria) data;
     //Si el objeto Categoria es del numero 1, lo asigno a su respectiva referencia
     if (c.numeroCategoria==1) {
-        catUno = (Categoria) data;
+      //  catUno = (Categoria) data;
     }
     //Si el objeto Categoria es del numero 2, lo asigno a su respectiva referencia
     if (c.numeroCategoria==1) {
-        catDos = (Categoria) data;
+      //  catDos = (Categoria) data;
     }
 
 }

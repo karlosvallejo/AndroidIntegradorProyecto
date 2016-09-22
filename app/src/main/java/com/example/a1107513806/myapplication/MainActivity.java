@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ip= (EditText) findViewById (R.id.editText);
+        ip= (EditText) findViewById (R.id.iphosti);
 if(ip.getText().toString().equalsIgnoreCase("Ip del host")) {
     ip.setOnClickListener(new View.OnClickListener() {
         @Override
